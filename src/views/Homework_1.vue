@@ -73,10 +73,6 @@ const stockMinus = (product) => {
 }
 // 取得目前編輯產品
 const editProduct = (product) => {
-  if (tempEdit.value.id === product.id) {
-    tempEdit.value = {}
-    return
-  }
   tempEdit.value = { ...product }
 }
 // 更換產品名稱
@@ -104,32 +100,31 @@ const changeName = () => {
           <small>{{ item.description }}</small>
         </td>
         <td>{{ item.price }}</td>
-        <td class="">
+        <td>
           <button class="btn btn-light" @click="stockMinus(item)" :disabled="item.stock <= 0">
             -</button
           >{{ item.stock }}<button class="btn btn-light" @click="stockAdd(item)">+</button>
         </td>
-        <td class="">
+        <td>
           <button type="button" @click="editProduct(item)" class="d-inline-block btn btn-light">
-            {{ tempEdit.id === item.id ? '取消' : '編輯' }}
-          </button>
-          <input
-            type="text"
-            name=""
-            id=""
-            v-model="tempEdit.name"
-            :class="{ 'd-none': tempEdit.id !== item.id }"
-          />
-          <button
-            type="button"
-            @click="changeName()"
-            class="btn btn-light"
-            :class="{ 'd-none': tempEdit.id !== item.id }"
-          >
-            確定
+            編輯
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+  <div v-if="tempEdit.id">
+    <h2 class="mb-3">編輯區域</h2>
+    <label for="edit-name" class="me-2">產品名稱</label>
+    <input
+      type="text"
+      name="edit-name"
+      id="edit-name"
+      v-model="tempEdit.name"
+      class="me-2"
+      :class="{ 'd-none': tempEdit == {} }"
+    />
+    <button type="button" @click="changeName()" class="btn btn-light me-2">確定</button>
+    <button type="button" @click="tempEdit = {}" class="btn btn-light">取消</button>
+  </div>
 </template>
