@@ -73,6 +73,10 @@ const stockMinus = (product) => {
 }
 // 取得目前編輯產品
 const editProduct = (product) => {
+  if (tempEdit.value.id === product.id) {
+    tempEdit.value = {}
+    return
+  }
   tempEdit.value = { ...product }
 }
 // 更換產品名稱
