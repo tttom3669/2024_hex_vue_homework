@@ -218,9 +218,9 @@ const updateTodoToggle = async (id) => {
     console.log(error)
   }
 }
-const updateTodoEdit = async (event, id) => {
-  todoEdit.value = toDoList.value.filter((item) => item.id === id)[0]
-  todoEdit.value.content = event.target.value ? event.target.value : todoEdit.value.content
+const updateTodoEdit = (event, id) => {
+  todoEdit.value = JSON.parse(JSON.stringify(toDoList.value.filter((item) => item.id === id)[0]))
+  todoEdit.value.content = event.target.value
   event.target.value = ''
 }
 /**
@@ -399,9 +399,7 @@ onMounted(() => {
                       :checked="item.status"
                       @change="updateTodoToggle(item.id)"
                     />
-                    <label class="form-check-label" for="flexCheckChecked">{{
-                      item.content
-                    }}</label>
+                    <label class="form-check-label" :for="item.id">{{ item.content }}</label>
                   </div>
                 </div>
                 <div class="col-4">
