@@ -27,6 +27,11 @@ const router = createRouter({
       name: 'homework_2',
       component: () => import('../views/Homework_2.vue')
     },
+    {
+      path: '/homework_3',
+      name: 'homework_3',
+      component: () => import('../views/Homework_3.vue')
+    },
 
     {
       path: '/:domain(.*)*',
