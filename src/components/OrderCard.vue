@@ -29,7 +29,7 @@ defineProps({
           <tbody>
             <tr v-for="item in outputOrder?.order" :key="item.id">
               <td>{{ item.name }}</td>
-              <td>{{ item.count }}</td>
+              <td>{{ item.num }}</td>
               <td>{{ item.price * item.num }}</td>
             </tr>
           </tbody>
